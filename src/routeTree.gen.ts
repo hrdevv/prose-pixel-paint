@@ -9,38 +9,187 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TeamRouteImport } from './routes/team'
+import { Route as ReviewRouteImport } from './routes/review'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as AuditRouteImport } from './routes/audit'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CasesIndexRouteImport } from './routes/cases.index'
+import { Route as CasesCaseIdRouteImport } from './routes/cases.$caseId'
+import { Route as SessionsSessionIdIndexRouteImport } from './routes/sessions.$sessionId.index'
+import { Route as SessionsSessionIdReviewRouteImport } from './routes/sessions.$sessionId.review'
+import { Route as SessionsSessionIdReportRouteImport } from './routes/sessions.$sessionId.report'
 
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewRoute = ReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuditRoute = AuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CasesIndexRoute = CasesIndexRouteImport.update({
+  id: '/cases/',
+  path: '/cases/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CasesCaseIdRoute = CasesCaseIdRouteImport.update({
+  id: '/cases/$caseId',
+  path: '/cases/$caseId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SessionsSessionIdIndexRoute = SessionsSessionIdIndexRouteImport.update({
+  id: '/sessions/$sessionId/',
+  path: '/sessions/$sessionId/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SessionsSessionIdReviewRoute = SessionsSessionIdReviewRouteImport.update({
+  id: '/sessions/$sessionId/review',
+  path: '/sessions/$sessionId/review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SessionsSessionIdReportRoute = SessionsSessionIdReportRouteImport.update({
+  id: '/sessions/$sessionId/report',
+  path: '/sessions/$sessionId/report',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
+  '/reports': typeof ReportsRoute
+  '/review': typeof ReviewRoute
+  '/team': typeof TeamRoute
+  '/cases/$caseId': typeof CasesCaseIdRoute
+  '/cases/': typeof CasesIndexRoute
+  '/sessions/$sessionId/report': typeof SessionsSessionIdReportRoute
+  '/sessions/$sessionId/review': typeof SessionsSessionIdReviewRoute
+  '/sessions/$sessionId/': typeof SessionsSessionIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
+  '/reports': typeof ReportsRoute
+  '/review': typeof ReviewRoute
+  '/team': typeof TeamRoute
+  '/cases/$caseId': typeof CasesCaseIdRoute
+  '/cases': typeof CasesIndexRoute
+  '/sessions/$sessionId/report': typeof SessionsSessionIdReportRoute
+  '/sessions/$sessionId/review': typeof SessionsSessionIdReviewRoute
+  '/sessions/$sessionId': typeof SessionsSessionIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
+  '/reports': typeof ReportsRoute
+  '/review': typeof ReviewRoute
+  '/team': typeof TeamRoute
+  '/cases/$caseId': typeof CasesCaseIdRoute
+  '/cases/': typeof CasesIndexRoute
+  '/sessions/$sessionId/report': typeof SessionsSessionIdReportRoute
+  '/sessions/$sessionId/review': typeof SessionsSessionIdReviewRoute
+  '/sessions/$sessionId/': typeof SessionsSessionIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/audit'
+    | '/reports'
+    | '/review'
+    | '/team'
+    | '/cases/$caseId'
+    | '/cases/'
+    | '/sessions/$sessionId/report'
+    | '/sessions/$sessionId/review'
+    | '/sessions/$sessionId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/audit'
+    | '/reports'
+    | '/review'
+    | '/team'
+    | '/cases/$caseId'
+    | '/cases'
+    | '/sessions/$sessionId/report'
+    | '/sessions/$sessionId/review'
+    | '/sessions/$sessionId'
+  id:
+    | '__root__'
+    | '/'
+    | '/audit'
+    | '/reports'
+    | '/review'
+    | '/team'
+    | '/cases/$caseId'
+    | '/cases/'
+    | '/sessions/$sessionId/report'
+    | '/sessions/$sessionId/review'
+    | '/sessions/$sessionId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuditRoute: typeof AuditRoute
+  ReportsRoute: typeof ReportsRoute
+  ReviewRoute: typeof ReviewRoute
+  TeamRoute: typeof TeamRoute
+  CasesCaseIdRoute: typeof CasesCaseIdRoute
+  CasesIndexRoute: typeof CasesIndexRoute
+  SessionsSessionIdReportRoute: typeof SessionsSessionIdReportRoute
+  SessionsSessionIdReviewRoute: typeof SessionsSessionIdReviewRoute
+  SessionsSessionIdIndexRoute: typeof SessionsSessionIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/review': {
+      id: '/review'
+      path: '/review'
+      fullPath: '/review'
+      preLoaderRoute: typeof ReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audit': {
+      id: '/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +197,56 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cases/': {
+      id: '/cases/'
+      path: '/cases'
+      fullPath: '/cases/'
+      preLoaderRoute: typeof CasesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cases/$caseId': {
+      id: '/cases/$caseId'
+      path: '/cases/$caseId'
+      fullPath: '/cases/$caseId'
+      preLoaderRoute: typeof CasesCaseIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sessions/$sessionId/': {
+      id: '/sessions/$sessionId/'
+      path: '/sessions/$sessionId'
+      fullPath: '/sessions/$sessionId/'
+      preLoaderRoute: typeof SessionsSessionIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sessions/$sessionId/review': {
+      id: '/sessions/$sessionId/review'
+      path: '/sessions/$sessionId/review'
+      fullPath: '/sessions/$sessionId/review'
+      preLoaderRoute: typeof SessionsSessionIdReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sessions/$sessionId/report': {
+      id: '/sessions/$sessionId/report'
+      path: '/sessions/$sessionId/report'
+      fullPath: '/sessions/$sessionId/report'
+      preLoaderRoute: typeof SessionsSessionIdReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuditRoute: AuditRoute,
+  ReportsRoute: ReportsRoute,
+  ReviewRoute: ReviewRoute,
+  TeamRoute: TeamRoute,
+  CasesCaseIdRoute: CasesCaseIdRoute,
+  CasesIndexRoute: CasesIndexRoute,
+  SessionsSessionIdReportRoute: SessionsSessionIdReportRoute,
+  SessionsSessionIdReviewRoute: SessionsSessionIdReviewRoute,
+  SessionsSessionIdIndexRoute: SessionsSessionIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
