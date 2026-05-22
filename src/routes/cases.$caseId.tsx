@@ -100,7 +100,7 @@ function CaseDetail() {
             <table className="w-full text-sm">
               <thead className="bg-muted/50 text-xs uppercase tracking-wider text-muted-foreground"><tr><th className="text-left px-5 py-3 font-medium">Name</th><th className="text-left px-5 py-3 font-medium">Role</th><th className="text-left px-5 py-3 font-medium">Email</th></tr></thead>
               <tbody className="divide-y divide-border">
-                {caseData.team.map(m => (<tr key={m.email}><td className="px-5 py-3 font-medium">{m.name}</td><td className="px-5 py-3 text-muted-foreground">{m.role}</td><td className="px-5 py-3 text-muted-foreground">{m.email}</td></tr>))}
+                {caseData.team.map((m: {name:string;role:string;email:string}) => (<tr key={m.email}><td className="px-5 py-3 font-medium">{m.name}</td><td className="px-5 py-3 text-muted-foreground">{m.role}</td><td className="px-5 py-3 text-muted-foreground">{m.email}</td></tr>))}
               </tbody>
             </table>
           </Card>
