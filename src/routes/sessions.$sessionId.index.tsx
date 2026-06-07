@@ -98,7 +98,7 @@ function SessionDetail() {
               </div>
               <p className="text-sm">{claim.text}</p>
               <div className="flex flex-wrap gap-2">
-                {claim.anchors.length === 0 ? <AnchorBadge status="none" /> : claim.anchors.map((a: {segmentId:string;status:import("@/lib/mock-data").AnchorStatus}, i: number) => <AnchorBadge key={i} status={a.status} />)}
+                {claim.anchors.length === 0 ? <AnchorBadge status="none" /> : claim.anchors.map((a: ClaimAnchor, i: number) => <AnchorBadge key={i} status={a.status} />)}
               </div>
               {claim.warning && (
                 <div className="text-xs flex items-start gap-2 bg-destructive/10 text-destructive border border-destructive/20 rounded-md p-2">
