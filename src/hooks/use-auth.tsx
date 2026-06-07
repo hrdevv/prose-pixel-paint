@@ -1,8 +1,9 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import { hasAnyRole as hasAnyRoleHelper, type AppRole } from "@/lib/permissions";
 
-export type AppRole = "lawyer" | "paralegal" | "reviewer" | "viewer";
+export type { AppRole };
 
 interface AuthState {
   session: Session | null;
