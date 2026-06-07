@@ -102,7 +102,7 @@ function ReportPreview() {
           <p className="text-xs text-muted-foreground mb-3">These claims were rejected or had no verifiable evidence anchor. They are excluded from the body of the report.</p>
           {excluded.length === 0 ? <Empty>None.</Empty> : (
             <ul className="space-y-3">
-              {excluded.map((c: import("@/lib/mock-data").AIClaim) => (
+              {excluded.map((c: AIClaim) => (
                 <li key={c.id} className="text-sm border-l-2 border-destructive/50 pl-4">
                   <p className="line-through text-muted-foreground">{c.text}</p>
                   {c.warning && <p className="text-xs text-destructive mt-1 flex items-start gap-1.5"><AlertTriangle className="size-3.5 mt-0.5" />{c.warning}</p>}
