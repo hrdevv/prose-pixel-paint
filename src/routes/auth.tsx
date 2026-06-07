@@ -1,7 +1,6 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable/index";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,8 +11,8 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign in — Courtroom Intelligence" },
-      { name: "description", content: "Secure sign-in to the Courtroom Intelligence workspace." },
+      { title: "Sign in — myJurist Court Intelligence" },
+      { name: "description", content: "Secure sign-in to the myJurist Court Intelligence workspace." },
     ],
   }),
   component: AuthPage,
@@ -62,16 +61,21 @@ function AuthPage() {
 
   const handleGoogle = async () => {
     setLoading(true);
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
-    });
-    if (result.error) {
-      toast.error("Google sign-in failed. Please try again.");
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: window.location.origin,
+        },
+      });
+      if (error) throw error;
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Google sign-in failed. Please try again.");
       setLoading(false);
-      return;
     }
-    if (result.redirected) return;
-    navigate({ to: "/" });
   };
 
   return (
@@ -82,8 +86,8 @@ function AuthPage() {
             <Scale className="size-5" />
           </div>
           <div>
-            <div className="font-serif text-lg leading-tight">Courtroom Intelligence</div>
-            <div className="text-[11px] uppercase tracking-widest text-muted-foreground">Secure workspace</div>
+            <div className="font-serif text-lg leading-tight">myJurist</div>
+            <div className="text-[11px] uppercase tracking-widest text-muted-foreground">Court Intelligence</div>
           </div>
         </div>
 
@@ -132,7 +136,7 @@ function AuthPage() {
         </Card>
 
         <p className="text-center text-xs text-muted-foreground mt-4">
-          <Link to="/auth" className="hover:underline">Courtroom Intelligence</Link> · Authorized personnel only
+          <Link to="/auth" className="hover:underline">myJurist</Link> · Authorized personnel only
         </p>
       </div>
     </div>
