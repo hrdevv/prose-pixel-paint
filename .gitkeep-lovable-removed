@@ -1,0 +1,9 @@
+# Lovable integration and configuration files removed on 2026-06-07
+# This file marks the removal of:
+# - .lovable/ directory (plan.md, project.json)
+# - src/integrations/lovable/ directory (index.ts)
+# - @lovable.dev dependencies from package.json
+# - All Lovable branding and meta tags
+# - Lovable OAuth integration replaced with Supabase OAuth
+
+# The application is now fully branded as myJurist (Court Intelligence)
