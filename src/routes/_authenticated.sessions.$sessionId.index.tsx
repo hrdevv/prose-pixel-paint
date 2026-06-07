@@ -9,7 +9,7 @@ import { getSession, type AIClaim, type ClaimAnchor, type EvidenceFile, type Tra
 import { AIDraftBadge, AnchorBadge, ClaimTypeBadge, ConfidenceBadge, ReviewBadge } from "@/components/legal/Badges";
 import { FileText, Sparkles, ClipboardList, FileCheck, Upload, ShieldAlert, History, Pencil } from "lucide-react";
 
-export const Route = createFileRoute("/sessions/$sessionId/")({
+export const Route = createFileRoute("/_authenticated/sessions/$sessionId/")({
   head: ({ params }) => {
     const s = getSession(params.sessionId);
     return { meta: [{ title: `${s?.title ?? "Session"} — Courtroom Intelligence` }, { name: "description", content: "Legal session workspace." }] };

@@ -6,7 +6,7 @@ import { getSession, getSegment, LEGAL_DISCLAIMER, type AIClaim, type ClaimAncho
 import { AnchorBadge, ConfidenceBadge } from "@/components/legal/Badges";
 import { AlertTriangle, Download, ShieldAlert } from "lucide-react";
 
-export const Route = createFileRoute("/sessions/$sessionId/report")({
+export const Route = createFileRoute("/_authenticated/sessions/$sessionId/report")({
   head: () => ({ meta: [{ title: "Report Preview — Courtroom Intelligence" }, { name: "description", content: "Human-reviewed report preview." }] }),
   loader: ({ params }) => {
     const s = getSession(params.sessionId);

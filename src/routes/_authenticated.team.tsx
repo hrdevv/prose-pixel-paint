@@ -3,7 +3,7 @@ import { AppLayout, PageHeader } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { mockUsers } from "@/lib/mock-data";
 
-export const Route = createFileRoute("/team")({
+export const Route = createFileRoute("/_authenticated/team")({
   head: () => ({ meta: [{ title: "Team — Courtroom Intelligence" }, { name: "description", content: "Organization members and roles." }] }),
   component: Team,
 });

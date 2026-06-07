@@ -6,7 +6,7 @@ import { getCase, sessions } from "@/lib/mock-data";
 import { Button } from "@/components/ui/button";
 import { FileText, Upload } from "lucide-react";
 
-export const Route = createFileRoute("/cases/$caseId")({
+export const Route = createFileRoute("/_authenticated/cases/$caseId")({
   head: ({ params }) => {
     const c = getCase(params.caseId);
     return { meta: [{ title: `${c?.title ?? "Case"} — Courtroom Intelligence` }, { name: "description", content: c?.reference ?? "Case detail" }] };

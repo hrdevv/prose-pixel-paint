@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { sessions, type AIClaim, type Session } from "@/lib/mock-data";
 import { AnchorBadge, ClaimTypeBadge, ConfidenceBadge, ReviewBadge } from "@/components/legal/Badges";
 
-export const Route = createFileRoute("/review")({
+export const Route = createFileRoute("/_authenticated/review")({
   head: () => ({ meta: [{ title: "Review Queue — Courtroom Intelligence" }, { name: "description", content: "All AI-assisted draft claims awaiting human review." }] }),
   component: ReviewQueue,
 });
