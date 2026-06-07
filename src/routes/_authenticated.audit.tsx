@@ -1,9 +1,16 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { AppLayout, PageHeader } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
+import { authorizeRoute } from "@/lib/permissions.functions";
+import { ROLE_GROUPS } from "@/lib/permissions";
 
 export const Route = createFileRoute("/_authenticated/audit")({
   head: () => ({ meta: [{ title: "Audit — Courtroom Intelligence" }, { name: "description", content: "Audit trail handoff notes." }] }),
+  loader: async () => {
+    const { authorized } = await authorizeRoute({ data: { allowed: ROLE_GROUPS.audit } });
+    if (!authorized) throw redirect({ to: "/unauthorized" });
+  },
+  errorComponent: () => <AppLayout><PageHeader title="Something went wrong" /></AppLayout>,
   component: Audit,
 });
 
