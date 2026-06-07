@@ -48,7 +48,7 @@ function SessionDetail() {
             <Button variant="ghost" size="sm"><Pencil className="size-4" /> Paste transcript (demo)</Button>
           </div>
           <ol className="space-y-4">
-            {session.transcript.map((seg: import("@/lib/mock-data").TranscriptSegment) => (
+            {session.transcript.map((seg: TranscriptSegment) => (
               <li key={seg.id} className="grid grid-cols-[80px_1fr_auto] gap-4 items-start text-sm border-l-2 border-border pl-4 hover:border-primary/50">
                 <span className="font-mono text-xs text-muted-foreground pt-1">{seg.timestamp}</span>
                 <div>
