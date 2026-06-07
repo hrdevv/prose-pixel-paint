@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { AppLayout, PageHeader } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { getSession, getSegment, LEGAL_DISCLAIMER } from "@/lib/mock-data";
+import { getSession, getSegment, LEGAL_DISCLAIMER, type AIClaim, type ClaimAnchor } from "@/lib/mock-data";
 import { AnchorBadge, ConfidenceBadge } from "@/components/legal/Badges";
 import { AlertTriangle, Download, ShieldAlert } from "lucide-react";
 
