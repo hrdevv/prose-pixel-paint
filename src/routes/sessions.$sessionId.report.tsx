@@ -76,7 +76,7 @@ function ReportPreview() {
         <Section title="3. Possible inconsistency candidates">
           {inconsistencies.length === 0 ? <Empty>None recorded.</Empty> : (
             <ul className="space-y-3">
-              {inconsistencies.map((c: import("@/lib/mock-data").AIClaim) => (
+              {inconsistencies.map((c: AIClaim) => (
                 <li key={c.id} className="text-sm border-l-2 border-warning/50 pl-4">
                   <p>{c.text}</p>
                   <p className="text-xs text-muted-foreground mt-1 italic">Flagged as a possible inconsistency candidate. Requires human professional review.</p>
