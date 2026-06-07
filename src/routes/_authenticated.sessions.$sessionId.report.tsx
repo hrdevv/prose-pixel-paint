@@ -3,7 +3,8 @@ import { AppLayout, PageHeader } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { getSession, getSegment, LEGAL_DISCLAIMER, type AIClaim, type ClaimAnchor } from "@/lib/mock-data";
-import { AnchorBadge, ConfidenceBadge } from "@/components/legal/Badges";
+import { ConfidenceBadge } from "@/components/legal/Badges";
+import { AnchorBadgeList } from "@/lib/claim-rendering";
 import { AlertTriangle, Download, ShieldAlert } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/sessions/$sessionId/report")({
