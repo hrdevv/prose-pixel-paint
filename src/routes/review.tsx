@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppLayout, PageHeader } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
-import { sessions } from "@/lib/mock-data";
+import { sessions, type AIClaim, type Session } from "@/lib/mock-data";
 import { AnchorBadge, ClaimTypeBadge, ConfidenceBadge, ReviewBadge } from "@/components/legal/Badges";
 
 export const Route = createFileRoute("/review")({
