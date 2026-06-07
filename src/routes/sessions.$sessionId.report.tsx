@@ -65,7 +65,7 @@ function ReportPreview() {
 
         <Section title="2. Evidence references">
           <ul className="text-sm space-y-2">
-            {approved.flatMap((c: import("@/lib/mock-data").AIClaim) => c.anchors).map((a: {segmentId:string;status:import("@/lib/mock-data").AnchorStatus}, i: number) => {
+            {approved.flatMap((c: AIClaim) => c.anchors).map((a: ClaimAnchor, i: number) => {
               const seg = getSegment(a.segmentId);
               if (!seg) return null;
               return <li key={i} className="font-mono text-xs">[{seg.timestamp}] {seg.speaker}: "{seg.text}"</li>;
