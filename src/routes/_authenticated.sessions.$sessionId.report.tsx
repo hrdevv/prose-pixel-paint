@@ -56,7 +56,7 @@ function ReportPreview() {
                   <p className="text-sm">{c.text}</p>
                   <div className="flex flex-wrap gap-2 mt-2">
                     <ConfidenceBadge level={c.confidence} />
-                    {c.anchors.map((a: ClaimAnchor, i: number) => <AnchorBadge key={i} status={a.status} />)}
+                    <AnchorBadgeList anchors={c.anchors} />
                   </div>
                 </li>
               ))}
