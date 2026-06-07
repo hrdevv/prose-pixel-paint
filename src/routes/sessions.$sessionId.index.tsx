@@ -72,9 +72,9 @@ function SessionDetail() {
             <div className="space-y-2 text-sm">
               <div className="flex justify-between"><span className="text-muted-foreground">Status</span><span>Review pending</span></div>
               <div className="flex justify-between"><span className="text-muted-foreground">Claims</span><span>{session.claims.length}</span></div>
-              <div className="flex justify-between"><span className="text-muted-foreground">Pending</span><span>{session.claims.filter((c: import("@/lib/mock-data").AIClaim) => c.review === "pending").length}</span></div>
-              <div className="flex justify-between"><span className="text-muted-foreground">Approved</span><span>{session.claims.filter((c: import("@/lib/mock-data").AIClaim) => c.review === "approved").length}</span></div>
-              <div className="flex justify-between"><span className="text-muted-foreground">Rejected</span><span>{session.claims.filter((c: import("@/lib/mock-data").AIClaim) => c.review === "rejected").length}</span></div>
+              <div className="flex justify-between"><span className="text-muted-foreground">Pending</span><span>{session.claims.filter((c: AIClaim) => c.review === "pending").length}</span></div>
+              <div className="flex justify-between"><span className="text-muted-foreground">Approved</span><span>{session.claims.filter((c: AIClaim) => c.review === "approved").length}</span></div>
+              <div className="flex justify-between"><span className="text-muted-foreground">Rejected</span><span>{session.claims.filter((c: AIClaim) => c.review === "rejected").length}</span></div>
             </div>
           </Card>
 
