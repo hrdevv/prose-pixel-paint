@@ -1,16 +1,21 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { AppLayout, PageHeader } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { getSession, getSegment, type AIClaim, type ClaimAnchor, type ReviewStatus } from "@/lib/mock-data";
-import { AIDraftBadge, AnchorBadge, ClaimTypeBadge, ConfidenceBadge, ReviewBadge } from "@/components/legal/Badges";
+import { getSession, type AIClaim, type ClaimAnchor, type TranscriptSegment } from "@/lib/mock-data";
+import { AIDraftBadge, ClaimTypeBadge, ConfidenceBadge, ReviewBadge } from "@/components/legal/Badges";
+import { AnchorBadgeList, resolveAnchorSegments } from "@/lib/claim-rendering";
+import { authorizeRoute } from "@/lib/permissions.functions";
+import { ROLE_GROUPS } from "@/lib/permissions";
 import { Check, X, Pencil, HelpCircle, FileQuestion } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/sessions/$sessionId/review")({
   head: () => ({ meta: [{ title: "Review Console — Courtroom Intelligence" }, { name: "description", content: "Side-by-side review of AI-assisted draft claims." }] }),
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
+    const { authorized } = await authorizeRoute({ data: { allowed: ROLE_GROUPS.reviewQueue } });
+    if (!authorized) throw redirect({ to: "/unauthorized" });
     const s = getSession(params.sessionId);
     if (!s) throw notFound();
     return { session: s };
