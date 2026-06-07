@@ -33,7 +33,7 @@ function ReviewQueue() {
                 <ClaimTypeBadge type={c.type} />
                 <ConfidenceBadge level={c.confidence} />
                 <ReviewBadge status={c.review} />
-                {c.anchors.length === 0 ? <AnchorBadge status="none" /> : <AnchorBadge status={c.anchors[0].status} />}
+                <AnchorBadgeList anchors={c.anchors.slice(0, 1)} />
               </div>
               <p className="text-sm">{c.text}</p>
               <p className="text-xs text-muted-foreground mt-1">{c.sessionTitle}</p>
