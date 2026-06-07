@@ -4,7 +4,7 @@ import { AppLayout, PageHeader } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { getSession, type AIClaim, type ClaimAnchor, type TranscriptSegment } from "@/lib/mock-data";
+import { getSession, type AIClaim, type TranscriptSegment } from "@/lib/mock-data";
 import { AIDraftBadge, ClaimTypeBadge, ConfidenceBadge, ReviewBadge } from "@/components/legal/Badges";
 import { AnchorBadgeList, resolveAnchorSegments } from "@/lib/claim-rendering";
 import { authorizeRoute } from "@/lib/permissions.functions";
