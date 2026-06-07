@@ -52,7 +52,7 @@ function ReviewDetail() {
       <div className="flex flex-wrap gap-2 mb-6">
         {filters.map(f => (
           <button key={f.key} onClick={() => setFilter(f.key)} className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${filter === f.key ? "bg-primary text-primary-foreground border-primary" : "bg-background text-muted-foreground border-border hover:bg-accent"}`}>
-            {f.label} <span className="ml-1 opacity-60">{session.claims.filter((c: import("@/lib/mock-data").AIClaim) => f.match(c)).length}</span>
+            {f.label} <span className="ml-1 opacity-60">{session.claims.filter((c: AIClaim) => f.match(c)).length}</span>
           </button>
         ))}
       </div>
