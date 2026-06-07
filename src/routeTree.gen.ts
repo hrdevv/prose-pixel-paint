@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated.index'
 import { Route as AuthenticatedTeamRouteImport } from './routes/_authenticated.team'
 import { Route as AuthenticatedReviewRouteImport } from './routes/_authenticated.review'
@@ -20,67 +21,71 @@ import { Route as AuthenticatedSessionsSessionIdIndexRouteImport } from './route
 import { Route as AuthenticatedSessionsSessionIdReviewRouteImport } from './routes/_authenticated.sessions.$sessionId.review'
 import { Route as AuthenticatedSessionsSessionIdReportRouteImport } from './routes/_authenticated.sessions.$sessionId.report'
 
-const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
-  id: '/_authenticated/',
-  path: '/',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedTeamRoute = AuthenticatedTeamRouteImport.update({
-  id: '/_authenticated/team',
+  id: '/team',
   path: '/team',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedReviewRoute = AuthenticatedReviewRouteImport.update({
-  id: '/_authenticated/review',
+  id: '/review',
   path: '/review',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedReportsRoute = AuthenticatedReportsRouteImport.update({
-  id: '/_authenticated/reports',
+  id: '/reports',
   path: '/reports',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAuditRoute = AuthenticatedAuditRouteImport.update({
-  id: '/_authenticated/audit',
+  id: '/audit',
   path: '/audit',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCasesIndexRoute = AuthenticatedCasesIndexRouteImport.update({
-  id: '/_authenticated/cases/',
+  id: '/cases/',
   path: '/cases/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCasesCaseIdRoute =
   AuthenticatedCasesCaseIdRouteImport.update({
-    id: '/_authenticated/cases/$caseId',
+    id: '/cases/$caseId',
     path: '/cases/$caseId',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedSessionsSessionIdIndexRoute =
   AuthenticatedSessionsSessionIdIndexRouteImport.update({
-    id: '/_authenticated/sessions/$sessionId/',
+    id: '/sessions/$sessionId/',
     path: '/sessions/$sessionId/',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedSessionsSessionIdReviewRoute =
   AuthenticatedSessionsSessionIdReviewRouteImport.update({
-    id: '/_authenticated/sessions/$sessionId/review',
+    id: '/sessions/$sessionId/review',
     path: '/sessions/$sessionId/review',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedSessionsSessionIdReportRoute =
   AuthenticatedSessionsSessionIdReportRouteImport.update({
-    id: '/_authenticated/sessions/$sessionId/report',
+    id: '/sessions/$sessionId/report',
     path: '/sessions/$sessionId/report',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof AuthenticatedIndexRoute
   '/audit': typeof AuthenticatedAuditRoute
   '/reports': typeof AuthenticatedReportsRoute
   '/review': typeof AuthenticatedReviewRoute
   '/team': typeof AuthenticatedTeamRoute
-  '/': typeof AuthenticatedIndexRoute
   '/cases/$caseId': typeof AuthenticatedCasesCaseIdRoute
   '/cases/': typeof AuthenticatedCasesIndexRoute
   '/sessions/$sessionId/report': typeof AuthenticatedSessionsSessionIdReportRoute
@@ -101,6 +106,7 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/_authenticated/audit': typeof AuthenticatedAuditRoute
   '/_authenticated/reports': typeof AuthenticatedReportsRoute
   '/_authenticated/review': typeof AuthenticatedReviewRoute
@@ -115,11 +121,11 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | '/audit'
     | '/reports'
     | '/review'
     | '/team'
-    | '/'
     | '/cases/$caseId'
     | '/cases/'
     | '/sessions/$sessionId/report'
@@ -139,6 +145,7 @@ export interface FileRouteTypes {
     | '/sessions/$sessionId'
   id:
     | '__root__'
+    | '/_authenticated'
     | '/_authenticated/audit'
     | '/_authenticated/reports'
     | '/_authenticated/review'
@@ -152,6 +159,92 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/': {
+      id: '/_authenticated/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/team': {
+      id: '/_authenticated/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof AuthenticatedTeamRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/review': {
+      id: '/_authenticated/review'
+      path: '/review'
+      fullPath: '/review'
+      preLoaderRoute: typeof AuthenticatedReviewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/reports': {
+      id: '/_authenticated/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof AuthenticatedReportsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/audit': {
+      id: '/_authenticated/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuthenticatedAuditRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/cases/': {
+      id: '/_authenticated/cases/'
+      path: '/cases'
+      fullPath: '/cases/'
+      preLoaderRoute: typeof AuthenticatedCasesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/cases/$caseId': {
+      id: '/_authenticated/cases/$caseId'
+      path: '/cases/$caseId'
+      fullPath: '/cases/$caseId'
+      preLoaderRoute: typeof AuthenticatedCasesCaseIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sessions/$sessionId/': {
+      id: '/_authenticated/sessions/$sessionId/'
+      path: '/sessions/$sessionId'
+      fullPath: '/sessions/$sessionId/'
+      preLoaderRoute: typeof AuthenticatedSessionsSessionIdIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sessions/$sessionId/review': {
+      id: '/_authenticated/sessions/$sessionId/review'
+      path: '/sessions/$sessionId/review'
+      fullPath: '/sessions/$sessionId/review'
+      preLoaderRoute: typeof AuthenticatedSessionsSessionIdReviewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sessions/$sessionId/report': {
+      id: '/_authenticated/sessions/$sessionId/report'
+      path: '/sessions/$sessionId/report'
+      fullPath: '/sessions/$sessionId/report'
+      preLoaderRoute: typeof AuthenticatedSessionsSessionIdReportRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+  }
+}
+
+interface AuthenticatedRouteRouteChildren {
   AuthenticatedAuditRoute: typeof AuthenticatedAuditRoute
   AuthenticatedReportsRoute: typeof AuthenticatedReportsRoute
   AuthenticatedReviewRoute: typeof AuthenticatedReviewRoute
@@ -164,82 +257,7 @@ export interface RootRouteChildren {
   AuthenticatedSessionsSessionIdIndexRoute: typeof AuthenticatedSessionsSessionIdIndexRoute
 }
 
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/_authenticated/': {
-      id: '/_authenticated/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/team': {
-      id: '/_authenticated/team'
-      path: '/team'
-      fullPath: '/team'
-      preLoaderRoute: typeof AuthenticatedTeamRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/review': {
-      id: '/_authenticated/review'
-      path: '/review'
-      fullPath: '/review'
-      preLoaderRoute: typeof AuthenticatedReviewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/reports': {
-      id: '/_authenticated/reports'
-      path: '/reports'
-      fullPath: '/reports'
-      preLoaderRoute: typeof AuthenticatedReportsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/audit': {
-      id: '/_authenticated/audit'
-      path: '/audit'
-      fullPath: '/audit'
-      preLoaderRoute: typeof AuthenticatedAuditRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/cases/': {
-      id: '/_authenticated/cases/'
-      path: '/cases'
-      fullPath: '/cases/'
-      preLoaderRoute: typeof AuthenticatedCasesIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/cases/$caseId': {
-      id: '/_authenticated/cases/$caseId'
-      path: '/cases/$caseId'
-      fullPath: '/cases/$caseId'
-      preLoaderRoute: typeof AuthenticatedCasesCaseIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/sessions/$sessionId/': {
-      id: '/_authenticated/sessions/$sessionId/'
-      path: '/sessions/$sessionId'
-      fullPath: '/sessions/$sessionId/'
-      preLoaderRoute: typeof AuthenticatedSessionsSessionIdIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/sessions/$sessionId/review': {
-      id: '/_authenticated/sessions/$sessionId/review'
-      path: '/sessions/$sessionId/review'
-      fullPath: '/sessions/$sessionId/review'
-      preLoaderRoute: typeof AuthenticatedSessionsSessionIdReviewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/sessions/$sessionId/report': {
-      id: '/_authenticated/sessions/$sessionId/report'
-      path: '/sessions/$sessionId/report'
-      fullPath: '/sessions/$sessionId/report'
-      preLoaderRoute: typeof AuthenticatedSessionsSessionIdReportRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-  }
-}
-
-const rootRouteChildren: RootRouteChildren = {
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAuditRoute: AuthenticatedAuditRoute,
   AuthenticatedReportsRoute: AuthenticatedReportsRoute,
   AuthenticatedReviewRoute: AuthenticatedReviewRoute,
@@ -253,6 +271,13 @@ const rootRouteChildren: RootRouteChildren = {
     AuthenticatedSessionsSessionIdReviewRoute,
   AuthenticatedSessionsSessionIdIndexRoute:
     AuthenticatedSessionsSessionIdIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+const rootRouteChildren: RootRouteChildren = {
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
