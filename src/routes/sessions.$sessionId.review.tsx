@@ -62,7 +62,7 @@ function ReviewDetail() {
         <Card className="p-2 h-fit lg:sticky lg:top-6">
           <ul className="space-y-1">
             {filtered.length === 0 && <li className="p-4 text-sm text-muted-foreground">No claims match this filter.</li>}
-            {filtered.map((c: import("@/lib/mock-data").AIClaim) => (
+            {filtered.map((c: AIClaim) => (
               <li key={c.id}>
                 <button onClick={() => setSelectedId(c.id)} className={`w-full text-left p-3 rounded-md transition-colors ${selected.id === c.id ? "bg-accent" : "hover:bg-accent/50"}`}>
                   <div className="flex flex-wrap gap-1.5 mb-1.5"><ClaimTypeBadge type={c.type} /></div>
