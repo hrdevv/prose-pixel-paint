@@ -50,12 +50,12 @@ function ReportPreview() {
             <Empty>No approved claims yet. Approve claims in the Review Console to populate this section.</Empty>
           ) : (
             <ul className="space-y-4">
-              {approved.map((c: import("@/lib/mock-data").AIClaim) => (
+              {approved.map((c: AIClaim) => (
                 <li key={c.id} className="border-l-2 border-success/50 pl-4">
                   <p className="text-sm">{c.text}</p>
                   <div className="flex flex-wrap gap-2 mt-2">
                     <ConfidenceBadge level={c.confidence} />
-                    {c.anchors.map((a: {segmentId:string;status:import("@/lib/mock-data").AnchorStatus}, i: number) => <AnchorBadge key={i} status={a.status} />)}
+                    {c.anchors.map((a: ClaimAnchor, i: number) => <AnchorBadge key={i} status={a.status} />)}
                   </div>
                 </li>
               ))}
