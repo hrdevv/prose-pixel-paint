@@ -33,12 +33,12 @@ const filters: { key: string; label: string; match: (c: AIClaim) => boolean }[] 
 function ReviewDetail() {
   const { session } = Route.useLoaderData();
   const [filter, setFilter] = useState("pending");
-  const [selectedId, setSelectedId] = useState(session.claims.find((c: import("@/lib/mock-data").AIClaim) => c.review === "pending")?.id ?? session.claims[0].id);
+  const [selectedId, setSelectedId] = useState(session.claims.find((c: AIClaim) => c.review === "pending")?.id ?? session.claims[0].id);
   const [note, setNote] = useState("");
 
   const filtered = useMemo(() => session.claims.filter(filters.find(f => f.key === filter)!.match), [session.claims, filter]);
-  const selected = session.claims.find((c: import("@/lib/mock-data").AIClaim) => c.id === selectedId) ?? filtered[0] ?? session.claims[0];
-  const sourceSegments = selected.anchors.map((a: {segmentId:string;status:import("@/lib/mock-data").AnchorStatus}) => getSegment(a.segmentId)).filter(Boolean);
+  const selected = session.claims.find((c: AIClaim) => c.id === selectedId) ?? filtered[0] ?? session.claims[0];
+  const sourceSegments = selected.anchors.map((a: ClaimAnchor) => getSegment(a.segmentId)).filter(Boolean);
 
   return (
     <AppLayout>
