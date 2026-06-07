@@ -43,7 +43,7 @@ function ReviewDetail() {
 
   const filtered = useMemo(() => session.claims.filter(filters.find(f => f.key === filter)!.match), [session.claims, filter]);
   const selected = session.claims.find((c: AIClaim) => c.id === selectedId) ?? filtered[0] ?? session.claims[0];
-  const sourceSegments = selected.anchors.map((a: ClaimAnchor) => getSegment(a.segmentId)).filter(Boolean);
+  const sourceSegments = resolveAnchorSegments(selected.anchors);
 
   return (
     <AppLayout>
