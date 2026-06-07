@@ -8,7 +8,7 @@ import { getSession, getSegment, type AIClaim, type ClaimAnchor, type ReviewStat
 import { AIDraftBadge, AnchorBadge, ClaimTypeBadge, ConfidenceBadge, ReviewBadge } from "@/components/legal/Badges";
 import { Check, X, Pencil, HelpCircle, FileQuestion } from "lucide-react";
 
-export const Route = createFileRoute("/sessions/$sessionId/review")({
+export const Route = createFileRoute("/_authenticated/sessions/$sessionId/review")({
   head: () => ({ meta: [{ title: "Review Console — Courtroom Intelligence" }, { name: "description", content: "Side-by-side review of AI-assisted draft claims." }] }),
   loader: ({ params }) => {
     const s = getSession(params.sessionId);

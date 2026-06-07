@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { cases, dashboardMetrics, recentActivity } from "@/lib/mock-data";
 import { Plus, ClipboardList, ArrowRight, Briefcase, AlertTriangle, FileCheck, Hourglass } from "lucide-react";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
     meta: [
       { title: "Dashboard — Courtroom Intelligence" },

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { cases } from "@/lib/mock-data";
 import { Plus } from "lucide-react";
 
-export const Route = createFileRoute("/cases/")({
+export const Route = createFileRoute("/_authenticated/cases/")({
   head: () => ({ meta: [{ title: "Cases — Courtroom Intelligence" }, { name: "description", content: "All active and archived cases." }] }),
   component: CasesIndex,
 });

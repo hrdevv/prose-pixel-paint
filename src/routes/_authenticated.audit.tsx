@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AppLayout, PageHeader } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 
-export const Route = createFileRoute("/audit")({
+export const Route = createFileRoute("/_authenticated/audit")({
   head: () => ({ meta: [{ title: "Audit — Courtroom Intelligence" }, { name: "description", content: "Audit trail handoff notes." }] }),
   component: Audit,
 });

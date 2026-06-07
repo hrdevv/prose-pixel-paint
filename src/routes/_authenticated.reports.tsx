@@ -3,7 +3,7 @@ import { AppLayout, PageHeader } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { sessions } from "@/lib/mock-data";
 
-export const Route = createFileRoute("/reports")({
+export const Route = createFileRoute("/_authenticated/reports")({
   head: () => ({ meta: [{ title: "Reports — Courtroom Intelligence" }, { name: "description", content: "Report previews." }] }),
   component: Reports,
 });

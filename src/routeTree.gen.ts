@@ -9,109 +9,129 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TeamRouteImport } from './routes/team'
-import { Route as ReviewRouteImport } from './routes/review'
-import { Route as ReportsRouteImport } from './routes/reports'
-import { Route as AuditRouteImport } from './routes/audit'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as CasesIndexRouteImport } from './routes/cases.index'
-import { Route as CasesCaseIdRouteImport } from './routes/cases.$caseId'
-import { Route as SessionsSessionIdIndexRouteImport } from './routes/sessions.$sessionId.index'
-import { Route as SessionsSessionIdReviewRouteImport } from './routes/sessions.$sessionId.review'
-import { Route as SessionsSessionIdReportRouteImport } from './routes/sessions.$sessionId.report'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated.index'
+import { Route as AuthenticatedTeamRouteImport } from './routes/_authenticated.team'
+import { Route as AuthenticatedReviewRouteImport } from './routes/_authenticated.review'
+import { Route as AuthenticatedReportsRouteImport } from './routes/_authenticated.reports'
+import { Route as AuthenticatedAuditRouteImport } from './routes/_authenticated.audit'
+import { Route as AuthenticatedCasesIndexRouteImport } from './routes/_authenticated.cases.index'
+import { Route as AuthenticatedCasesCaseIdRouteImport } from './routes/_authenticated.cases.$caseId'
+import { Route as AuthenticatedSessionsSessionIdIndexRouteImport } from './routes/_authenticated.sessions.$sessionId.index'
+import { Route as AuthenticatedSessionsSessionIdReviewRouteImport } from './routes/_authenticated.sessions.$sessionId.review'
+import { Route as AuthenticatedSessionsSessionIdReportRouteImport } from './routes/_authenticated.sessions.$sessionId.report'
 
-const TeamRoute = TeamRouteImport.update({
-  id: '/team',
-  path: '/team',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ReviewRoute = ReviewRouteImport.update({
-  id: '/review',
-  path: '/review',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ReportsRoute = ReportsRouteImport.update({
-  id: '/reports',
-  path: '/reports',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuditRoute = AuditRouteImport.update({
-  id: '/audit',
-  path: '/audit',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const CasesIndexRoute = CasesIndexRouteImport.update({
+const AuthenticatedTeamRoute = AuthenticatedTeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedReviewRoute = AuthenticatedReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedReportsRoute = AuthenticatedReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAuditRoute = AuthenticatedAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCasesIndexRoute = AuthenticatedCasesIndexRouteImport.update({
   id: '/cases/',
   path: '/cases/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const CasesCaseIdRoute = CasesCaseIdRouteImport.update({
-  id: '/cases/$caseId',
-  path: '/cases/$caseId',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SessionsSessionIdIndexRoute = SessionsSessionIdIndexRouteImport.update({
-  id: '/sessions/$sessionId/',
-  path: '/sessions/$sessionId/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SessionsSessionIdReviewRoute = SessionsSessionIdReviewRouteImport.update({
-  id: '/sessions/$sessionId/review',
-  path: '/sessions/$sessionId/review',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SessionsSessionIdReportRoute = SessionsSessionIdReportRouteImport.update({
-  id: '/sessions/$sessionId/report',
-  path: '/sessions/$sessionId/report',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const AuthenticatedCasesCaseIdRoute =
+  AuthenticatedCasesCaseIdRouteImport.update({
+    id: '/cases/$caseId',
+    path: '/cases/$caseId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSessionsSessionIdIndexRoute =
+  AuthenticatedSessionsSessionIdIndexRouteImport.update({
+    id: '/sessions/$sessionId/',
+    path: '/sessions/$sessionId/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSessionsSessionIdReviewRoute =
+  AuthenticatedSessionsSessionIdReviewRouteImport.update({
+    id: '/sessions/$sessionId/review',
+    path: '/sessions/$sessionId/review',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSessionsSessionIdReportRoute =
+  AuthenticatedSessionsSessionIdReportRouteImport.update({
+    id: '/sessions/$sessionId/report',
+    path: '/sessions/$sessionId/report',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/audit': typeof AuditRoute
-  '/reports': typeof ReportsRoute
-  '/review': typeof ReviewRoute
-  '/team': typeof TeamRoute
-  '/cases/$caseId': typeof CasesCaseIdRoute
-  '/cases/': typeof CasesIndexRoute
-  '/sessions/$sessionId/report': typeof SessionsSessionIdReportRoute
-  '/sessions/$sessionId/review': typeof SessionsSessionIdReviewRoute
-  '/sessions/$sessionId/': typeof SessionsSessionIdIndexRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/auth': typeof AuthRoute
+  '/audit': typeof AuthenticatedAuditRoute
+  '/reports': typeof AuthenticatedReportsRoute
+  '/review': typeof AuthenticatedReviewRoute
+  '/team': typeof AuthenticatedTeamRoute
+  '/cases/$caseId': typeof AuthenticatedCasesCaseIdRoute
+  '/cases/': typeof AuthenticatedCasesIndexRoute
+  '/sessions/$sessionId/report': typeof AuthenticatedSessionsSessionIdReportRoute
+  '/sessions/$sessionId/review': typeof AuthenticatedSessionsSessionIdReviewRoute
+  '/sessions/$sessionId/': typeof AuthenticatedSessionsSessionIdIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/audit': typeof AuditRoute
-  '/reports': typeof ReportsRoute
-  '/review': typeof ReviewRoute
-  '/team': typeof TeamRoute
-  '/cases/$caseId': typeof CasesCaseIdRoute
-  '/cases': typeof CasesIndexRoute
-  '/sessions/$sessionId/report': typeof SessionsSessionIdReportRoute
-  '/sessions/$sessionId/review': typeof SessionsSessionIdReviewRoute
-  '/sessions/$sessionId': typeof SessionsSessionIdIndexRoute
+  '/auth': typeof AuthRoute
+  '/audit': typeof AuthenticatedAuditRoute
+  '/reports': typeof AuthenticatedReportsRoute
+  '/review': typeof AuthenticatedReviewRoute
+  '/team': typeof AuthenticatedTeamRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/cases/$caseId': typeof AuthenticatedCasesCaseIdRoute
+  '/cases': typeof AuthenticatedCasesIndexRoute
+  '/sessions/$sessionId/report': typeof AuthenticatedSessionsSessionIdReportRoute
+  '/sessions/$sessionId/review': typeof AuthenticatedSessionsSessionIdReviewRoute
+  '/sessions/$sessionId': typeof AuthenticatedSessionsSessionIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/audit': typeof AuditRoute
-  '/reports': typeof ReportsRoute
-  '/review': typeof ReviewRoute
-  '/team': typeof TeamRoute
-  '/cases/$caseId': typeof CasesCaseIdRoute
-  '/cases/': typeof CasesIndexRoute
-  '/sessions/$sessionId/report': typeof SessionsSessionIdReportRoute
-  '/sessions/$sessionId/review': typeof SessionsSessionIdReviewRoute
-  '/sessions/$sessionId/': typeof SessionsSessionIdIndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/audit': typeof AuthenticatedAuditRoute
+  '/_authenticated/reports': typeof AuthenticatedReportsRoute
+  '/_authenticated/review': typeof AuthenticatedReviewRoute
+  '/_authenticated/team': typeof AuthenticatedTeamRoute
+  '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/cases/$caseId': typeof AuthenticatedCasesCaseIdRoute
+  '/_authenticated/cases/': typeof AuthenticatedCasesIndexRoute
+  '/_authenticated/sessions/$sessionId/report': typeof AuthenticatedSessionsSessionIdReportRoute
+  '/_authenticated/sessions/$sessionId/review': typeof AuthenticatedSessionsSessionIdReviewRoute
+  '/_authenticated/sessions/$sessionId/': typeof AuthenticatedSessionsSessionIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/audit'
     | '/reports'
     | '/review'
@@ -123,11 +143,12 @@ export interface FileRouteTypes {
     | '/sessions/$sessionId/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
+    | '/auth'
     | '/audit'
     | '/reports'
     | '/review'
     | '/team'
+    | '/'
     | '/cases/$caseId'
     | '/cases'
     | '/sessions/$sessionId/report'
@@ -135,117 +156,149 @@ export interface FileRouteTypes {
     | '/sessions/$sessionId'
   id:
     | '__root__'
-    | '/'
-    | '/audit'
-    | '/reports'
-    | '/review'
-    | '/team'
-    | '/cases/$caseId'
-    | '/cases/'
-    | '/sessions/$sessionId/report'
-    | '/sessions/$sessionId/review'
-    | '/sessions/$sessionId/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/audit'
+    | '/_authenticated/reports'
+    | '/_authenticated/review'
+    | '/_authenticated/team'
+    | '/_authenticated/'
+    | '/_authenticated/cases/$caseId'
+    | '/_authenticated/cases/'
+    | '/_authenticated/sessions/$sessionId/report'
+    | '/_authenticated/sessions/$sessionId/review'
+    | '/_authenticated/sessions/$sessionId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AuditRoute: typeof AuditRoute
-  ReportsRoute: typeof ReportsRoute
-  ReviewRoute: typeof ReviewRoute
-  TeamRoute: typeof TeamRoute
-  CasesCaseIdRoute: typeof CasesCaseIdRoute
-  CasesIndexRoute: typeof CasesIndexRoute
-  SessionsSessionIdReportRoute: typeof SessionsSessionIdReportRoute
-  SessionsSessionIdReviewRoute: typeof SessionsSessionIdReviewRoute
-  SessionsSessionIdIndexRoute: typeof SessionsSessionIdIndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/team': {
-      id: '/team'
-      path: '/team'
-      fullPath: '/team'
-      preLoaderRoute: typeof TeamRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/review': {
-      id: '/review'
-      path: '/review'
-      fullPath: '/review'
-      preLoaderRoute: typeof ReviewRouteImport
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/reports': {
-      id: '/reports'
-      path: '/reports'
-      fullPath: '/reports'
-      preLoaderRoute: typeof ReportsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/audit': {
-      id: '/audit'
-      path: '/audit'
-      fullPath: '/audit'
-      preLoaderRoute: typeof AuditRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
+    '/_authenticated/': {
+      id: '/_authenticated/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/cases/': {
-      id: '/cases/'
+    '/_authenticated/team': {
+      id: '/_authenticated/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof AuthenticatedTeamRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/review': {
+      id: '/_authenticated/review'
+      path: '/review'
+      fullPath: '/review'
+      preLoaderRoute: typeof AuthenticatedReviewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/reports': {
+      id: '/_authenticated/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof AuthenticatedReportsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/audit': {
+      id: '/_authenticated/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuthenticatedAuditRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/cases/': {
+      id: '/_authenticated/cases/'
       path: '/cases'
       fullPath: '/cases/'
-      preLoaderRoute: typeof CasesIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedCasesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/cases/$caseId': {
-      id: '/cases/$caseId'
+    '/_authenticated/cases/$caseId': {
+      id: '/_authenticated/cases/$caseId'
       path: '/cases/$caseId'
       fullPath: '/cases/$caseId'
-      preLoaderRoute: typeof CasesCaseIdRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedCasesCaseIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/sessions/$sessionId/': {
-      id: '/sessions/$sessionId/'
+    '/_authenticated/sessions/$sessionId/': {
+      id: '/_authenticated/sessions/$sessionId/'
       path: '/sessions/$sessionId'
       fullPath: '/sessions/$sessionId/'
-      preLoaderRoute: typeof SessionsSessionIdIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedSessionsSessionIdIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/sessions/$sessionId/review': {
-      id: '/sessions/$sessionId/review'
+    '/_authenticated/sessions/$sessionId/review': {
+      id: '/_authenticated/sessions/$sessionId/review'
       path: '/sessions/$sessionId/review'
       fullPath: '/sessions/$sessionId/review'
-      preLoaderRoute: typeof SessionsSessionIdReviewRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedSessionsSessionIdReviewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/sessions/$sessionId/report': {
-      id: '/sessions/$sessionId/report'
+    '/_authenticated/sessions/$sessionId/report': {
+      id: '/_authenticated/sessions/$sessionId/report'
       path: '/sessions/$sessionId/report'
       fullPath: '/sessions/$sessionId/report'
-      preLoaderRoute: typeof SessionsSessionIdReportRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedSessionsSessionIdReportRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAuditRoute: typeof AuthenticatedAuditRoute
+  AuthenticatedReportsRoute: typeof AuthenticatedReportsRoute
+  AuthenticatedReviewRoute: typeof AuthenticatedReviewRoute
+  AuthenticatedTeamRoute: typeof AuthenticatedTeamRoute
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedCasesCaseIdRoute: typeof AuthenticatedCasesCaseIdRoute
+  AuthenticatedCasesIndexRoute: typeof AuthenticatedCasesIndexRoute
+  AuthenticatedSessionsSessionIdReportRoute: typeof AuthenticatedSessionsSessionIdReportRoute
+  AuthenticatedSessionsSessionIdReviewRoute: typeof AuthenticatedSessionsSessionIdReviewRoute
+  AuthenticatedSessionsSessionIdIndexRoute: typeof AuthenticatedSessionsSessionIdIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAuditRoute: AuthenticatedAuditRoute,
+  AuthenticatedReportsRoute: AuthenticatedReportsRoute,
+  AuthenticatedReviewRoute: AuthenticatedReviewRoute,
+  AuthenticatedTeamRoute: AuthenticatedTeamRoute,
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedCasesCaseIdRoute: AuthenticatedCasesCaseIdRoute,
+  AuthenticatedCasesIndexRoute: AuthenticatedCasesIndexRoute,
+  AuthenticatedSessionsSessionIdReportRoute:
+    AuthenticatedSessionsSessionIdReportRoute,
+  AuthenticatedSessionsSessionIdReviewRoute:
+    AuthenticatedSessionsSessionIdReviewRoute,
+  AuthenticatedSessionsSessionIdIndexRoute:
+    AuthenticatedSessionsSessionIdIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AuditRoute: AuditRoute,
-  ReportsRoute: ReportsRoute,
-  ReviewRoute: ReviewRoute,
-  TeamRoute: TeamRoute,
-  CasesCaseIdRoute: CasesCaseIdRoute,
-  CasesIndexRoute: CasesIndexRoute,
-  SessionsSessionIdReportRoute: SessionsSessionIdReportRoute,
-  SessionsSessionIdReviewRoute: SessionsSessionIdReviewRoute,
-  SessionsSessionIdIndexRoute: SessionsSessionIdIndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
