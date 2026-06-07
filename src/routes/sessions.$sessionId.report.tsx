@@ -89,7 +89,7 @@ function ReportPreview() {
         <Section title="4. Unresolved issues / Follow-ups">
           {followUps.length === 0 ? <Empty>None recorded.</Empty> : (
             <ul className="space-y-2 text-sm">
-              {followUps.map((c: import("@/lib/mock-data").AIClaim) => <li key={c.id} className="border-l-2 border-info/50 pl-4">{c.text}</li>)}
+              {followUps.map((c: AIClaim) => <li key={c.id} className="border-l-2 border-info/50 pl-4">{c.text}</li>)}
             </ul>
           )}
         </Section>
