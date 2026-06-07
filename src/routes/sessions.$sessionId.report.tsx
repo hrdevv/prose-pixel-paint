@@ -20,10 +20,10 @@ export const Route = createFileRoute("/sessions/$sessionId/report")({
 
 function ReportPreview() {
   const { session } = Route.useLoaderData();
-  const approved = session.claims.filter((c: import("@/lib/mock-data").AIClaim) => c.review === "approved");
-  const inconsistencies = session.claims.filter((c: import("@/lib/mock-data").AIClaim) => c.type === "inconsistency_candidate");
-  const followUps = session.claims.filter((c: import("@/lib/mock-data").AIClaim) => c.review === "needs_more_evidence");
-  const excluded = session.claims.filter((c: import("@/lib/mock-data").AIClaim) => c.review === "rejected" || c.support === "unsupported");
+  const approved = session.claims.filter((c: AIClaim) => c.review === "approved");
+  const inconsistencies = session.claims.filter((c: AIClaim) => c.type === "inconsistency_candidate");
+  const followUps = session.claims.filter((c: AIClaim) => c.review === "needs_more_evidence");
+  const excluded = session.claims.filter((c: AIClaim) => c.review === "rejected" || c.support === "unsupported");
 
   return (
     <AppLayout>
