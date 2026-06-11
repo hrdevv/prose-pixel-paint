@@ -33,8 +33,13 @@ export const getMyRoles = createServerFn({ method: "GET" })
  */
 export const authorizeRoute = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((data: { allowed: AppRole[] }) =>
-    z.object({ allowed: z.array(roleSchema).min(1).max(ALL_ROLES.length) }).parse(data),
+  .inputValidator((data: { allowed: AppRole[]; surface?: RoleGroup }) =>
+    z
+      .object({
+        allowed: z.array(roleSchema).min(1).max(ALL_ROLES.length),
+        surface: surfaceSchema.optional(),
+      })
+      .parse(data),
   )
   .handler(async ({ data, context }): Promise<{ roles: AppRole[]; authorized: boolean }> => {
     const { supabase, userId } = context;
@@ -44,5 +49,17 @@ export const authorizeRoute = createServerFn({ method: "POST" })
       .eq("user_id", userId);
 
     const roles = error ? [] : (rows ?? []).map((row) => row.role as AppRole);
-    return { roles, authorized: hasAnyRole(roles, data.allowed) };
+    const authorized = hasAnyRole(roles, data.allowed);
+
+    if (!authorized) {
+      // Server-side audit log so permission issues can be troubleshooted.
+      // Includes the blocked surface/route, the roles required to access it,
+      // and the caller's actual roles. Never trusts client-supplied claims.
+      const surfaceLabel = data.surface ? ROLE_GROUP_LABELS[data.surface] : "unknown surface";
+      console.warn(
+        `[authz] access denied -> /unauthorized | surface=${data.surface ?? "unknown"} (${surfaceLabel}) | requiredRoles=[${data.allowed.join(", ")}] | userId=${userId} | userRoles=[${roles.join(", ") || "none"}]`,
+      );
+    }
+
+    return { roles, authorized };
   });
