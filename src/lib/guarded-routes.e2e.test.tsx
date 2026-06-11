@@ -22,10 +22,14 @@ import { Route as SessionReviewRoute } from "@/routes/_authenticated.sessions.$s
 
 function mockBackendForRoles(userRoles: AppRole[]) {
   authorizeRouteMock.mockImplementation(
-    async ({ data }: { data: { allowed: AppRole[] } }) => ({
-      roles: userRoles,
-      authorized: data.allowed.some((role) => userRoles.includes(role)),
-    }),
+    async (input: { data: { allowed: AppRole[] } }) => {
+      console.log("IMPL INPUT", JSON.stringify(input));
+      const { data } = input;
+      return {
+        roles: userRoles,
+        authorized: data.allowed.some((role) => userRoles.includes(role)),
+      };
+    },
   );
 }
 
