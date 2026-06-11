@@ -37,13 +37,13 @@ type GuardedCase = {
 };
 
 const guardedRoutes: GuardedCase[] = [
-  { name: "/audit", group: "audit", loader: AuditRoute.options.loader!, args: {} },
-  { name: "/team", group: "team", loader: TeamRoute.options.loader!, args: {} },
-  { name: "/review", group: "reviewQueue", loader: ReviewRoute.options.loader!, args: {} },
+  { name: "/audit", group: "audit", loader: AuditRoute.options.loader as GuardedCase["loader"], args: {} },
+  { name: "/team", group: "team", loader: TeamRoute.options.loader as GuardedCase["loader"], args: {} },
+  { name: "/review", group: "reviewQueue", loader: ReviewRoute.options.loader as GuardedCase["loader"], args: {} },
   {
     name: "/sessions/$sessionId/review",
     group: "reviewQueue",
-    loader: SessionReviewRoute.options.loader!,
+    loader: SessionReviewRoute.options.loader as GuardedCase["loader"],
     args: { params: { sessionId: "s1" } },
   },
 ];
