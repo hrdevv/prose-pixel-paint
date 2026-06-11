@@ -8,8 +8,10 @@ import { ROLE_GROUPS, type AppRole, type RoleGroup } from "@/lib/permissions";
 // full loader -> guardRouteAccess -> redirect path without a live backend.
 const authorizeRouteMock = vi.fn();
 vi.mock("@/lib/permissions.functions", () => ({
-  authorizeRoute: (args: { data: { allowed: AppRole[]; surface?: RoleGroup } }) =>
-    authorizeRouteMock(args),
+  authorizeRoute: (args: { data: { allowed: AppRole[]; surface?: RoleGroup } }) => {
+    console.log("FACTORY ARGS", JSON.stringify(args));
+    return authorizeRouteMock(args);
+  },
   getMyRoles: () => Promise.resolve({ roles: [] }),
 }));
 
