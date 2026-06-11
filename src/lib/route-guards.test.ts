@@ -45,16 +45,16 @@ describe("guardRouteAccess", () => {
   });
 
   describe.each(GROUPS)("group %s", (group) => {
-    const allowedRoles = ROLE_GROUPS[group];
+    const allowedRoles = ROLE_GROUPS[group] as AppRole[];
     const deniedRoles = ALL_ROLES.filter((r) => !allowedRoles.includes(r));
 
-    it.each(allowedRoles)("allows role %s and returns roles", async (role) => {
+    it.each(allowedRoles)("allows role %s and returns roles", async (role: AppRole) => {
       mockBackendForRoles([role]);
       const result = await guardRouteAccess(group);
       expect(result).toEqual({ roles: [role] });
     });
 
-    it.each(deniedRoles)("redirects role %s to /unauthorized", async (role) => {
+    it.each(deniedRoles)("redirects role %s to /unauthorized", async (role: AppRole) => {
       mockBackendForRoles([role]);
       try {
         await guardRouteAccess(group);
