@@ -20,9 +20,9 @@ import { Route as SessionReviewRoute } from "@/routes/_authenticated.sessions.$s
 
 function mockBackendForRoles(userRoles: AppRole[]) {
   authorizeRouteMock.mockImplementation(
-    async (input: { data: { allowed: AppRole[] } }) => ({
+    async (input?: { data: { allowed: AppRole[] } }) => ({
       roles: userRoles,
-      authorized: input.data.allowed.some((role) => userRoles.includes(role)),
+      authorized: input ? input.data.allowed.some((role) => userRoles.includes(role)) : false,
     }),
   );
 }
