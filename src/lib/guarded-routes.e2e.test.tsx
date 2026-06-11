@@ -71,9 +71,9 @@ describe("guarded routes (e2e loader checks)", () => {
           throw new Error("expected redirect to /unauthorized");
         } catch (thrown) {
           expect(isRedirect(thrown)).toBe(true);
-          const redirect = thrown as { to: string; search: { from: RoleGroup } };
-          expect(redirect.to).toBe("/unauthorized");
-          expect(redirect.search.from).toBe(group);
+          const redirect = thrown as { options: { to: string; search: { from: RoleGroup } } };
+          expect(redirect.options.to).toBe("/unauthorized");
+          expect(redirect.options.search.from).toBe(group);
         }
       },
     );
