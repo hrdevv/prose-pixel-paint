@@ -1,9 +1,12 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
-import { ALL_ROLES, hasAnyRole, type AppRole } from "@/lib/permissions";
+import { ALL_ROLES, ROLE_GROUP_LABELS, hasAnyRole, type AppRole, type RoleGroup } from "@/lib/permissions";
 
 const roleSchema = z.enum(ALL_ROLES as [AppRole, ...AppRole[]]);
+const surfaceSchema = z.enum(
+  Object.keys(ROLE_GROUP_LABELS) as [RoleGroup, ...RoleGroup[]],
+);
 
 /**
  * Reads the authenticated user's roles from the backend. RLS scopes the
