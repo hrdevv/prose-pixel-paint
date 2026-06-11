@@ -31,3 +31,7 @@ jobs:
       # (noImplicitAny is enabled via "strict": true in tsconfig.json).
       - name: Type-check
         run: bun run typecheck
+
+      # Runs the guardRouteAccess unit tests and the guarded-route e2e loader checks.
+      - name: Test
+        run: bun run test
