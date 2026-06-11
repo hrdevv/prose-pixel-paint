@@ -34,7 +34,7 @@ export const Route = createFileRoute("/_authenticated/unauthorized")({
 });
 
 function Unauthorized() {
-  const { from } = Route.useSearch();
+  const { from } = Route.useSearch() as UnauthorizedSearch;
   const fetchRoles = useServerFn(getMyRoles);
   const { data } = useQuery({
     queryKey: ["my-roles"],
